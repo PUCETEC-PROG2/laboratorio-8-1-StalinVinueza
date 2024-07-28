@@ -10,33 +10,34 @@
         <div class="container">
             <div class="bg-primary text-secondary p-4 text-center mb-4">
                 <img class="img-fluid" src="{% static "logo.svg" %}" alt="">
-            </div>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
-                <div class="container-fluid">
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse" id="navbarText">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                      <li class="nav-item">
-                        <a class="nav-link" href="{% url "pokedex:index" %}"><strong>Home</strong></a>
-                      </li>
-                      {% if user.is_authenticated %}
+                <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                  <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarText">
+                      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url "pokedex:add_pokemon" %}"><strong>Nuevo Pokemon</strong></a>
+                          <a class="nav-link" href="{% url "pokedex:index" %}"><strong>Home</strong></a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url "logout" %}"><strong>Logout</strong></a>
-                        </li>
-                      {% else %}
-                        <li class="nav-item">
-                          <a class="nav-link" href="{% url "pokedex:login" %}"><strong>Login</strong></a>
-                        </li>
-                      {% endif %}
-                    </ul>
+                        {% if user.is_authenticated %}
+                          <li class="nav-item">
+                              <a class="nav-link" href="{% url "pokedex:add_pokemon" %}"><strong>Nuevo Pokemon</strong></a>
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="{% url "logout" %}"><strong>Logout</strong></a>
+                          </li>
+                        {% else %}
+                          <li class="nav-item">
+                            <a class="nav-link" href="{% url "pokedex:login" %}"><strong>Login</strong></a>
+                          </li>
+                        {% endif %}
+                      </ul>
+                    </div>
                   </div>
-                </div>
-              </nav>
+                </nav>
+            </div>
+            
             {% block content %}{% endblock content %}
         </div>
     </body>
