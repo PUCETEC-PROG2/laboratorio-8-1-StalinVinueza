@@ -2,10 +2,11 @@
 {% block title %}POKEDEX{% endblock title %}
 {% block content %}
     <h5 class="py-4">Bienvenido a tu pokedex</h5>
-    <div class="card-group">
+    <div class="card-group" >
         {% for pokemon in pokemons %}
             <div class="card bg-light">
-                <img src="{{ pokemon.picture.url }}" alt="">
+
+                <img class="img-fluid" src="{{ pokemon.picture.url }}" alt="" >
                 <div class="card-body">
                     <h4 class="card-title">{{pokemon}}</h4>
                     <p class="card-text">
@@ -28,4 +29,3 @@
         {% endfor %}
     </div>
 {% endblock content %}
-

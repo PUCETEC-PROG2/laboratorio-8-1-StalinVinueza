@@ -1,11 +1,17 @@
 {% extends "base.html" %}
 {% block title %}{{ pokemon }}{% endblock title %}
 {% block content %}
+<div class="mx-auto" style="width: 300px;">
     <p class="py-4">Has elegido el pokemon: <strong>{{ pokemon | capfirst }}</strong></p>
-    <h3>Características:</h3>
-    <ul>
-        <li>Tipo: {{ pokemon.type }}</li>
-        <li>Peso: {{ pokemon.weight }} kg.</li>
-        <li>Altura: {{ pokemon.height }} cm.</li>
-    </ul>
+    <div class="card-title">
+        <img src="{{ pokemon.picture.url }}" alt="">
+        <h3>Características:</h3>
+        <ul>
+            <li>Tipo: {{ pokemon.type }}</li>
+            <li>Peso: {{ pokemon.weight }} kg.</li>
+            <li>Altura: {{ pokemon.height }} cm.</li>
+         
+        </ul>
+    </div>
+</div>
 {% endblock content %}

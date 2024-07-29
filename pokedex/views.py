@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template import loader
 
-from .models import Pokemon
+from .models import Pokemon, Trainer
 from .forms import PokemonForm
 
 #Importaciones de librería de autenticación de Django
@@ -18,11 +18,14 @@ def index(request):
 def pokemon(request, pokemon_id):
     #SELECT * FROM pokedex_pokemon WHERE id='pokemon_id'
     pokemon = Pokemon.objects.get(id=pokemon_id)
+    
     template = loader.get_template('display_pokemon.html')
     context = {
         'pokemon': pokemon
+       
     }
     return HttpResponse(template.render(context, request))
+
 
 @login_required
 def add_pokemon(request):
