@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.template import loader
+from django.contrib.auth import logout as auth_logout
 
 from .models import Pokemon, Trainer
 from .forms import PokemonForm, TrainerForm
@@ -95,6 +96,12 @@ def delete_trainer(required, id):
     trainer = get_object_or_404(Trainer, pk = id)
     trainer.delete()
     return redirect('pokedex:index')
+
+
+def logout(request):
+    auth_logout(request)
+    return redirect('pokedex:index')
+
 
 class CustomLoginView(LoginView):
     template_name = 'login.html'

@@ -13,5 +13,6 @@ urlpatterns = [
     path("delete_pokemon/<int:id>/", views.delete_pokemon, name="delete_pokemon"),
     path("delete_trainer/<int:id>/", views.delete_trainer, name="delete_trainer"),
     path("login/", views.CustomLoginView.as_view(), name='login'),
+    path("accounts/logout/", views.logout, name="logout"),
 
 ]
