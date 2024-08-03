@@ -25,6 +25,9 @@
                               <a class="nav-link" href="{% url "pokedex:add_pokemon" %}"><strong>Nuevo Pokemon</strong></a>
                           </li>
                           <li class="nav-item">
+                            <a class="nav-link" href="{% url "pokedex:add_trainer" %}"><strong>Nuevo Entrenador</strong></a>
+                          </li>
+                          <li class="nav-item">
                               <a class="nav-link" href="{% url "logout" %}"><strong>Logout</strong></a>
                           </li>
                         {% else %}

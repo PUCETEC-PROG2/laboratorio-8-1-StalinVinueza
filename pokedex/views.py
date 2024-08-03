@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.template import loader
 
 from .models import Pokemon, Trainer
-from .forms import PokemonForm
+from .forms import PokemonForm, TrainerForm
 
 #Importaciones de librería de autenticación de Django
 from django.contrib.auth.views import LoginView
@@ -12,20 +12,27 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     #pokemons = Pokemon.objects.all() ## SELECT * FROM pokedex_pokemon
     pokemons = Pokemon.objects.order_by('type') ## SELECT * FROM pokedex_pokemon ORD
+    trainers = Trainer.objects.order_by('level')
     template = loader.get_template('index.html')
-    return HttpResponse(template.render({'pokemons': pokemons}, request))
+    return render (request, 'index.html', {'pokemons':pokemons,  'trainers':trainers})
 
 def pokemon(request, pokemon_id):
     #SELECT * FROM pokedex_pokemon WHERE id='pokemon_id'
     pokemon = Pokemon.objects.get(id=pokemon_id)
-    
     template = loader.get_template('display_pokemon.html')
     context = {
         'pokemon': pokemon
-       
     }
     return HttpResponse(template.render(context, request))
 
+def trainer(request, trainer_id):
+    #SELECT * FROM pokedex_pokemon WHERE id='pokemon_id'
+    trainer = Trainer.objects.get(id=trainer_id)
+    template = loader.get_template('display_trainer.html')
+    context = {
+        'trainer': trainer
+    }
+    return HttpResponse(template.render(context, request))
 
 @login_required
 def add_pokemon(request):
@@ -38,6 +45,18 @@ def add_pokemon(request):
         form = PokemonForm()
     
     return render(request, 'pokemon_form.html', {'form': form})
+
+@login_required
+def add_trainer(request):
+    if request.method == 'POST':
+        form = TrainerForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('pokedex:index')
+    else:
+        form = TrainerForm()
+    
+    return render(request, 'trainer_form.html', {'form': form})
 
 @login_required
 def edit_pokemon(request, id):
@@ -53,9 +72,28 @@ def edit_pokemon(request, id):
     return render(request, 'pokemon_form.html', {'form': form})
 
 @login_required
+def edit_trainer(request, id):
+    trainer = get_object_or_404(Trainer, pk = id)
+    if request.method == 'POST':
+        form = TrainerForm(request.POST, request.FILES, instance=trainer)
+        if form.is_valid():
+            form.save()
+            return redirect('pokedex:index')
+    else:
+        form = TrainerForm(instance=trainer)
+    
+    return render(request, 'trainer_form.html', {'form': form})
+
+@login_required
 def delete_pokemon(required, id):
     pokemon = get_object_or_404(Pokemon, pk = id)
     pokemon.delete()
+    return redirect('pokedex:index')
+
+@login_required
+def delete_trainer(required, id):
+    trainer = get_object_or_404(Trainer, pk = id)
+    trainer.delete()
     return redirect('pokedex:index')
 
 class CustomLoginView(LoginView):
