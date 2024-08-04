@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% block title %}POKEDEX{% endblock title %}
 {% block content %}
-    <h5 class="py-4">Bienvenido a tu pokedex</h5>
+    <h5 class="py-4 text-center">Bienvenido a tu pokedex</h5>
     <div class="card-group" >
         {% for pokemon in pokemons %}
-            <div class="card bg-light">
+            <div class="card bg-light ">
 
-                <img class="img-fluid" src="{{ pokemon.picture.url }}" alt="" >
+                <img class="img-fluid "  src="{{ pokemon.picture.url }}" alt="" >
                 <div class="card-body">
                     <h4 class="card-title">{{pokemon}}</h4>
                     <p class="card-text">
@@ -37,7 +37,7 @@
                 <h4 class="card-title">{{trainer}}</h4>
                 <p class="card-text">
                     Nombre: {{ trainer.name }} <br>
-                    Nivel: {{ trainer.level }}
+                    Apellido: {{ trainer.last_name }}
                 </p>
                 <a href="trainer/{{ trainer.id }}" class="btn btn-secondary">
                     <i class="fa-solid fa-eye"></i>
